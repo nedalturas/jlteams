@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Justlife Team</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    
+    <meta name="description" content="" />
+
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:alt" content="" />
+    <meta name="theme-color" content="#fafafa" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.png" />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"
+      defer
+    ></script>
+
+    <script src="js/app.js" defer></script>
+
+  </head>
+
+  <body>
+
+    {# NAV #}
+
+    <div class="ui top borderless fixed menu" id="nav">
+      <div class="ui container">
+        <div class="item">
+          <img
+            src="data:image/png;base64,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"
+            alt="Logo"
+          />
+        </div>
+        <div class="item" id="brand-name">Justlife Team</div>
+
+        <div class="right menu">
+          <div class="item">
+            <a href="">FAQs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui container">
+      <!-- FILTERS -->
+      <div class="ui form" id="content">
+        <div class="three fields">
+          <div class="field">
+            <label for="searchInput">Search Company</label>
+            <input
+              type="text"
+              id="searchInput"
+              name="searchCompany"
+              placeholder="Search by company name..."
+            />
+          </div>
+          <div class="field">
+            <label for="cityFilter">Select City</label>
+            <select
+              id="cityFilter"
+              class="ui search dropdown"
+              name="selectCity"
+            >
+              <option value="all">All Cities</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="serviceTypeFilter">Select Service Type</label>
+            <select
+              id="serviceTypeFilter"
+              class="ui search dropdown"
+              name="selectService"
+            >
+              <option value="all">All Services</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="loader" class="ui active inverted dimmer">
+        <div class="ui large primary elastic text loader">Loading</div>
+      </div>
+      <!-- TABLE-->
+      <table
+        class="ui selectable blue celled striped fixed single line table"
+        id="companyTable"
+      >
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>City Coverage</th>
+            <th>Service Types</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be dynamically added here -->
+
+          <div class="ui modal">
+            <div class="header">Company Details</div>
+
+            <div class="content">
+              <h3 id="modalCompanyName"></h3>
+              <p>
+                <strong>Cities Covered:</strong>
+                <span id="modalCitiesCovered"></span>
+              </p>
+              <p>
+                <strong>Services Offered:</strong>
+                <span id="modalServicesOffered"></span>
+              </p>
+              <p>
+                <strong>Status:</strong> <span id="modalCompanyStatus"></span>
+              </p>
+              <p>
+                <strong>Whatsapp Link:</strong>
+                <span id="modalWhatsapp"></span>
+              </p>
+              <p>
+                <strong>Complete Service Detail:</strong>
+                <span id="serviceDetail"></span>
+              </p>
+            </div>
+            <div class="actions">
+              <div class="ui cancel button negative">Close</div>
+            </div>
+          </div>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add your site or application content here -->
+  </body>
+</html>
