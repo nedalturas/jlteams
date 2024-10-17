@@ -64,8 +64,7 @@ function renderTable(filteredCompanies) {
       <td>${citiesCovered}</td>
       <td>${servicesOffered}</td>
       <td>
-        <div class="mini ui vertical animated primary button" tabindex="0">
-          <div class="hidden content">view</div>
+        <div class="mini ui vertical  primary button" tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
           </div>
@@ -74,9 +73,8 @@ function renderTable(filteredCompanies) {
     `;
 
     // Add event listener for the button
-    row.querySelector('.mini.button').addEventListener('click', () => {
-      showModal(company);
-    });
+    const button = row.querySelector('.mini.button');
+    button.addEventListener('click', () => showModal(company));
 
     tableBody.appendChild(row);
   });
@@ -207,4 +205,3 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 // Run initialization
-
