@@ -4,12 +4,18 @@ const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
-// Fetch data from Google Sheets
+// Fetch data from Google Sheets with caching
 async function fetchSheetData() {
+  const cachedData = localStorage.getItem('sheetData');
+  if (cachedData) {
+    return JSON.parse(cachedData);
+  }
+
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
   const response = await fetch(url);
   const data = await response.json();
-  return data.values; // Returns all the rows
+  localStorage.setItem('sheetData', JSON.stringify(data.values)); // Cache the result
+  return data.values;
 }
 
 // Function to extract companies from the sheet data
@@ -28,7 +34,6 @@ function processSheetData(sheetData) {
         Ajman: row[4] === 'TRUE',
         'Al Ain': row[5] === 'TRUE',
       },
-      // Assuming services are in a comma-separated string like "Home Cleaning, Deep Cleaning"
       services: row[6].split(',').map((service) => service.trim()), // Split into array and trim whitespace
       status: row[7],
       whatsapp: row[8],
@@ -40,21 +45,20 @@ function processSheetData(sheetData) {
   return companies;
 }
 
-
-// Render table rows based on filtered companies
+// Render table rows based on filtered companies with optimized DOM manipulation
 function renderTable(filteredCompanies) {
   const tableBody = document.querySelector('#companyTable tbody');
   tableBody.innerHTML = ''; // Clear the table
+
+  const fragment = document.createDocumentFragment(); // Use document fragment
 
   filteredCompanies.forEach((company) => {
     const citiesCovered = cityOptions
       .filter((city) => company.cities[city])
       .join(', ');
-    const servicesOffered = company.services.join(', '); // Join services array into string
+    const servicesOffered = company.services.join(', ');
 
-    // Add 'positive' class for active and 'negative' for inactive companies
-    const rowClass =
-      company.status === 'Active' ? 'neutral' : 'negative disabled';
+    const rowClass = company.status === 'Active' ? 'neutral' : 'negative disabled';
 
     const row = document.createElement('tr');
     row.className = rowClass;
@@ -62,8 +66,8 @@ function renderTable(filteredCompanies) {
     row.innerHTML = `
       <td>${company.name}</td>
       <td>${citiesCovered}</td>
-      <td>${servicesOffered}</td>
-      <td>
+      <td class="">${servicesOffered}</td>
+      <td class="left aligned">
         <div class="mini ui vertical  primary button" tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
@@ -72,12 +76,13 @@ function renderTable(filteredCompanies) {
       </td>
     `;
 
-    // Add event listener for the button
     const button = row.querySelector('.mini.button');
     button.addEventListener('click', () => showModal(company));
 
-    tableBody.appendChild(row);
+    fragment.appendChild(row); // Append row to fragment
   });
+
+  tableBody.appendChild(fragment); // Append fragment to the table once
 }
 
 function showModal(company) {
@@ -118,12 +123,20 @@ function showModal(company) {
     .modal('show');
 }
 
-// Filter logic for search, city, and service type
+// Debouncing function to improve filtering performance
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Filter logic for search, city, and service type with debounce
 function filterTable(companies) {
   const searchTerm = document.getElementById('searchInput').value.toLowerCase();
   const selectedCity = document.getElementById('cityFilter').value;
-  const selectedServiceType =
-    document.getElementById('serviceTypeFilter').value;
+  const selectedServiceType = document.getElementById('serviceTypeFilter').value;
 
   const filteredCompanies = companies.filter((company) => {
     const matchesSearch = company.name.toLowerCase().includes(searchTerm);
@@ -164,22 +177,23 @@ function populateServiceTypeDropdown(companies) {
   });
 }
 
-// Add event listeners for filtering
+// Add event listeners for filtering with debounce
 function addFilterListeners(companies) {
+  const debouncedFilterTable = debounce(() => filterTable(companies), 300);
+
   document
     .getElementById('searchInput')
-    .addEventListener('input', () => filterTable(companies));
+    .addEventListener('input', debouncedFilterTable);
   document
     .getElementById('cityFilter')
-    .addEventListener('change', () => filterTable(companies));
+    .addEventListener('change', debouncedFilterTable);
   document
     .getElementById('serviceTypeFilter')
-    .addEventListener('change', () => filterTable(companies));
+    .addEventListener('change', debouncedFilterTable);
 }
 
 // Initialize the table and filters
 document.addEventListener('DOMContentLoaded', async function () {
-  // Initialize the table and filters
   async function init() {
     const loader = document.getElementById('loader');
     if (loader) loader.classList.add('active');
@@ -196,12 +210,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     addFilterListeners(companies);
     $('.ui.dropdown').dropdown();
 
-    // Hide the loader
     if (loader) loader.classList.remove('active');
   }
 
-  // Run initialization
   init();
 });
-
-// Run initialization
