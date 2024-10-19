@@ -24,3 +24,39 @@ body {
 #content {
   margin-top: 5em;
 }
+
+
+/* Hide the modal initially */
+.custom-modal {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateY(-50px); /* Start with it slightly above the viewport */
+}
+
+/* Show the modal smoothly */
+.custom-modal.show {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0); /* Bring it back to its normal position */
+}
+
+/* Optional: backdrop styling */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal-backdrop.show {
+  visibility: visible;
+  opacity: 1;
+}
