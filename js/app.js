@@ -1,5 +1,5 @@
-const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
-const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
+// const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
+// const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
 const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
@@ -11,12 +11,24 @@ async function fetchSheetData() {
     return JSON.parse(cachedData);
   }
 
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+  const url = `/fetchSheet`;
   const response = await fetch(url);
   const data = await response.json();
   localStorage.setItem('sheetData', JSON.stringify(data.values)); // Cache the result
   return data.values;
 }
+
+// Test the fetchSheetData function
+document.addEventListener('DOMContentLoaded', async function () {
+  try {
+    const sheetData = await fetchSheetData();
+    console.log('Fetched Sheet Data:', sheetData); // Log the fetched data to the console
+    const companies = processSheetData(sheetData); // Process the data if needed
+    renderTable(companies); // Render the table with the fetched data
+  } catch (error) {
+    console.error('Error fetching sheet data:', error);
+  }
+});
 
 // Function to extract companies from the sheet data
 function processSheetData(sheetData) {
@@ -41,8 +53,7 @@ function processSheetData(sheetData) {
     };
     companies.push(company);
   }
-
-  return companies;
+  return companies; // Return the processed companies
 }
 
 // Render table rows based on filtered companies with optimized DOM manipulation
@@ -68,7 +79,7 @@ function renderTable(filteredCompanies) {
       <td>${citiesCovered}</td>
       <td class="">${servicesOffered}</td>
       <td class="left aligned">
-        <div class="mini ui vertical  primary button" tabindex="0">
+        <div class="mini ui vertical primary button" tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
           </div>
@@ -82,7 +93,7 @@ function renderTable(filteredCompanies) {
     fragment.appendChild(row); // Append row to fragment
   });
 
-  tableBody.appendChild(fragment); // Append fragment to the table once
+  tableBody.appendChild(fragment); // Append all rows to the table body
 }
 
 function showModal(company) {
