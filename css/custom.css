@@ -71,3 +71,8 @@ body {
 #whatsapp{
   background-color: #25d366;
 }
+
+table thead th{
+  color: black;
+  font-weight: bolder;
+}

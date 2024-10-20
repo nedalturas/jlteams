@@ -73,7 +73,7 @@ function renderTable(filteredCompanies) {
       <td>${citiesCovered}</td>
       <td>${servicesOffered}</td>
       <td class="center aligned">
-        <div class="mini ui vertical primary button" tabindex="0">
+        <div class="ui mini vertical primary button " tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
           </div>
@@ -97,7 +97,6 @@ function renderTable(filteredCompanies) {
     tableBody.appendChild(row);
   });
 }
-
 
 
 function showModal(company) {
