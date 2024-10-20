@@ -51,34 +51,54 @@ function renderTable(filteredCompanies) {
       .filter((city) => company.cities[city])
       .join(', ');
     const servicesOffered = company.services.join(', '); // Join services array into string
-
-    // Add 'positive' class for active and 'negative' for inactive companies
-    const rowClass =
-      company.status === 'Active' ? 'neutral' : 'negative';
+    const rowClass = company.status === 'Active' ? 'neutral' : 'negative';
 
     const row = document.createElement('tr');
     row.className = rowClass;
+
+    // Determine if WhatsApp button should be disabled
+    const isWhatsappAvailable = company.whatsapp && company.whatsapp.trim() !== '';
+    const whatsappButtonClass = isWhatsappAvailable ? '' : 'disabled'; // Add 'disabled' class if no link
+
+    // Render WhatsApp button with or without 'disabled' class
+    const whatsappButton = `
+      <div class="mini ui vertical primary button ${whatsappButtonClass}" id="whatsapp" tabindex="0">
+        <div class="visible content">
+          <i class="whatsapp icon"></i>
+        </div>
+      </div>`;
 
     row.innerHTML = `
       <td>${company.name}</td>
       <td>${citiesCovered}</td>
       <td>${servicesOffered}</td>
       <td class="center aligned">
-        <div class="mini ui vertical  primary button" tabindex="0">
+        <div class="mini ui vertical primary button" tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
           </div>
         </div>
+        ${whatsappButton} <!-- WhatsApp button is always rendered -->
       </td>
     `;
 
-    // Add event listener for the button
-    const button = row.querySelector('.mini.button');
-    button.addEventListener('click', () => showModal(company));
+    // Add event listener for the "eye" button
+    const eyeButton = row.querySelector('.mini.button');
+    eyeButton.addEventListener('click', () => showModal(company));
+
+    // Add event listener for the WhatsApp button if it's not disabled
+    const whatsappElement = row.querySelector('#whatsapp');
+    if (isWhatsappAvailable) {
+      whatsappElement.addEventListener('click', () => {
+        window.open(company.whatsapp, '_blank'); // Open WhatsApp link in a new tab
+      });
+    }
 
     tableBody.appendChild(row);
   });
 }
+
+
 
 function showModal(company) {
   // Populate the modal with company details
@@ -122,11 +142,11 @@ function showModal(company) {
   } else {
     document.getElementById('serviceDetail').innerHTML = '<br><p>No details available</p>';
   }
-  
-  
+
+
   // Show the modal
   $('.ui.modal')
-    .modal({ centered: false, transition: 'slide down', closable: true, keyboardShortcuts: true,  })
+    .modal({ centered: false, transition: 'slide down', closable: true, keyboardShortcuts: true, })
     .modal('show');
 }
 

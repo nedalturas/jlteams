@@ -1,158 +1,132 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Justlife Team</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/custom.css" />
-    
 
-    <meta name="description" content="See marketplace teams for Justlife easily" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jlteamdb.netlify.app/" />
-    <meta property="og:title" content="Justlife Team" />
-    <meta property="og:description" content="See marketplace teams for Justlife easily" />
-    <meta property="og:image" content="https://jlteamdb.netlify.app/assets/jlteammeta.png" />
-    <meta property="og:image:alt" content="Justlife Team Meta Image" />
-    <meta name="theme-color" content="#fafafa" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Justlife Team</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/custom.css" />
 
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="icon.png" />
 
-    <link rel="manifest" href="site.webmanifest" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css"
-    />
+  <meta name="description" content="See marketplace teams for Justlife easily" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jlteamdb.netlify.app/" />
+  <meta property="og:title" content="Justlife Team" />
+  <meta property="og:description" content="See marketplace teams for Justlife easily" />
+  <meta property="og:image" content="https://jlteamdb.netlify.app/assets/jlteammeta.png" />
+  <meta property="og:image:alt" content="Justlife Team Meta Image" />
+  <meta name="theme-color" content="#fafafa" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"
-      defer
-    ></script>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.png" />
 
-    <script src="js/app.js" ></script>
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css" />
 
-  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js" defer></script>
 
-  <body>
+  <script src="js/app.js"></script>
 
-    {# NAV #}
+</head>
 
-    <div class="ui top borderless fixed menu" id="nav">
-      <div class="ui container">
-        <div class="item">
-          <img
-            src="assets/logo.png"
-            alt="Logo"
-          />
-        </div>
-        <div class="item" id="brand-name">Justlife Team</div>
-        
-        <div class="right menu">
-          <div class="item">
-            <a href="index.html">Database</a>
-          </div>
-          <div class="item">
-            <a href="faq.html">FAQs</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<body>
 
+  {# NAV #}
+
+  <div class="ui top borderless fixed menu" id="nav">
     <div class="ui container">
-      <!-- FILTERS -->
-      <div class="ui form" id="content">
-        <div class="three fields">
-          <div class="field">
-            <label for="searchInput">Search Company</label>
-            <input
-              type="text"
-              id="searchInput"
-              name="searchCompany"
-              placeholder="Search by company name..."
-            />
-          </div>
-          <div class="field">
-            <label for="cityFilter">Select City</label>
-            <select
-              id="cityFilter"
-              class="ui search dropdown"
-              name="selectCity"
-            >
-              <option value="all">All Cities</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="serviceTypeFilter">Select Service Type</label>
-            <select
-              id="serviceTypeFilter"
-              class="ui search dropdown"
-              name="selectService"
-            >
-              <option value="all">All Services</option>
-            </select>
-          </div>
+      <div class="item">
+        <img src="assets/logo.png" alt="Logo" />
+      </div>
+      <div class="item" id="brand-name">Justlife Team</div>
+
+      <div class="right menu">
+        <div class="item">
+          <a href="index.html">Database</a>
+        </div>
+        <div class="item">
+          <a href="faq.html">FAQs</a>
         </div>
       </div>
-      <div id="loader" class="ui active inverted dimmer">
-        <div class="ui large primary elastic text loader">Loading</div>
-      </div>
-      <!-- TABLE-->
-      <table
-        class="ui compact selectable blue celled striped fixed single line small table"
-        id="companyTable"
-      >
-        <thead>
-          <tr>
-            <th>Company Name</th>
-            <th>City Coverage</th>
-            <th class="six wide">Service Types</th>
-            <th class="two wide center aligned">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Rows will be dynamically added here -->
-
-          <div class="ui modal">
-            <div class="header">Company Details</div>
-
-            <div class="content">
-              <h3 id="modalCompanyName"></h3>
-              <p>
-                <strong>Cities Covered:</strong>
-                <span id="modalCitiesCovered"></span>
-              </p>
-              <p>
-                <strong>Services Offered:</strong>
-                <span id="modalServicesOffered"></span>
-              </p>
-              <p>
-                <strong>Status:</strong> <span id="modalCompanyStatus"></span>
-              </p>
-              <p>
-                <strong>Whatsapp Link:</strong>
-                <span id="modalWhatsapp"></span>
-              </p>
-              <p>
-                <strong>Complete Service Detail:</strong>
-                <br>
-                <span id="serviceDetail"></span>
-              </p>
-            </div>
-            <div class="actions">
-              <div class="ui cancel button negative">Close</div>
-            </div>
-          </div>
-        </tbody>
-      </table>
     </div>
+  </div>
 
-    <!-- Add your site or application content here -->
-  </body>
+  <div class="ui container">
+    <!-- FILTERS -->
+    <div class="ui form" id="content">
+      <div class="three fields">
+        <div class="field">
+          <label for="searchInput">Search Company</label>
+          <input type="text" id="searchInput" name="searchCompany" placeholder="Search by company name..." />
+        </div>
+        <div class="field">
+          <label for="cityFilter">Select City</label>
+          <select id="cityFilter" class="ui search dropdown" name="selectCity">
+            <option value="all">All Cities</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="serviceTypeFilter">Select Service Type</label>
+          <select id="serviceTypeFilter" class="ui search dropdown" name="selectService">
+            <option value="all">All Services</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="loader" class="ui active inverted dimmer">
+      <div class="ui large primary elastic text loader">Loading</div>
+    </div>
+    <!-- TABLE-->
+    <table class="ui compact selectable blue celled striped fixed single line small table" id="companyTable">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>City Coverage</th>
+          <th class="six wide">Service Types</th>
+          <th class="two wide center aligned">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+
+        <div class="ui modal">
+          <div class="header">Company Details</div>
+
+          <div class="content">
+            <h3 id="modalCompanyName"></h3>
+            <p>
+              <strong>Cities Covered:</strong>
+              <span id="modalCitiesCovered"></span>
+            </p>
+            <p>
+              <strong>Services Offered:</strong>
+              <span id="modalServicesOffered"></span>
+            </p>
+            <p>
+              <strong>Status:</strong> <span id="modalCompanyStatus"></span>
+            </p>
+            <p>
+              <strong>Whatsapp Link:</strong>
+              <span id="modalWhatsapp"></span>
+            </p>
+            <p>
+              <strong>Complete Service Detail:</strong>
+              <br>
+              <span id="serviceDetail"></span>
+            </p>
+          </div>
+          <div class="actions">
+            <div class="ui cancel button negative">Close</div>
+          </div>
+        </div>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add your site or application content here -->
+</body>
+
 </html>

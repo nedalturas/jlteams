@@ -67,3 +67,7 @@ body {
 .status-segment:hover {
   transform: translateY(-2px);
 }
+
+#whatsapp{
+  background-color: #25d366;
+}
