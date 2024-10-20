@@ -54,7 +54,7 @@ function renderTable(filteredCompanies) {
 
     // Add 'positive' class for active and 'negative' for inactive companies
     const rowClass =
-      company.status === 'Active' ? 'neutral' : 'negative disabled';
+      company.status === 'Active' ? 'neutral' : 'negative';
 
     const row = document.createElement('tr');
     row.className = rowClass;
@@ -63,7 +63,7 @@ function renderTable(filteredCompanies) {
       <td>${company.name}</td>
       <td>${citiesCovered}</td>
       <td>${servicesOffered}</td>
-      <td>
+      <td class="center aligned">
         <div class="mini ui vertical  primary button" tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
@@ -110,11 +110,23 @@ function showModal(company) {
     whatsappElement.textContent = 'N/A'; // Display N/A if no link is present
   }
 
-  document.getElementById('serviceDetail').textContent = company.completeDetail;
+  // TODO: Render Company Complete Details notes in a new line
+  // document.getElementById('serviceDetail').textContent =  company.completeDetail;
 
+  // document.getElementById('serviceDetail').innerHTML = company.completeDetail.replace(/\n/g, '<br>');
+
+  if (company.completeDetail) {
+    const details = company.completeDetail.split('\n');
+    const listItems = details.map(detail => `<li>${detail}</li>`).join('');
+    document.getElementById('serviceDetail').innerHTML = `<ul>${listItems}</ul>`;
+  } else {
+    document.getElementById('serviceDetail').innerHTML = '<br><p>No details available</p>';
+  }
+  
+  
   // Show the modal
   $('.ui.modal')
-    .modal({ centered: false, transition: 'slide down', closable: false })
+    .modal({ centered: false, transition: 'slide down', closable: true, keyboardShortcuts: true,  })
     .modal('show');
 }
 
