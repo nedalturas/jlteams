@@ -26,9 +26,17 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .floating {
@@ -68,11 +76,38 @@ body {
   transform: translateY(-2px);
 }
 
-#whatsapp{
+#whatsapp {
   background-color: #25d366;
 }
 
-table thead th{
+table thead th {
   color: black;
   font-weight: bolder;
+}
+
+.footer {
+  background-color: #222d32;
+
+  color: white;
+  padding: 4em 0;
+  width: 100%;
+  margin-top: 4em;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-bottom {
+  margin-top: 2em;
+  padding-top: 2em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.grid.stackable>.column:not(.row) {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
 }

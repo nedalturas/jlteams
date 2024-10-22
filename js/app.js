@@ -231,8 +231,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (loader) loader.classList.remove('active');
   }
 
+  document.getElementById("year").textContent = new Date().getFullYear();
+
   // Run initialization
   init();
 });
+
 
 // Run initialization
