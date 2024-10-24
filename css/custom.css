@@ -18,17 +18,27 @@ body {
 #nav {
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
+  z-index: 1000
 }
 
 
 #content {
   margin-top: 5em;
+  z-index: 500;
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .floating {
@@ -68,11 +78,26 @@ body {
   transform: translateY(-2px);
 }
 
-#whatsapp{
+#whatsapp {
   background-color: #25d366;
 }
 
-table thead th{
+table thead th {
   color: black;
   font-weight: bolder;
+}
+
+.footer {
+  background-color: #222d32;
+  color: white;
+  padding: 2em 0;
+  width: 100%;
+  margin-top: 4em;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.grid.stackable>.column:not(.row) {
+    padding-bottom: 1rem !important;
+  }
 }
