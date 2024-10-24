@@ -88,16 +88,40 @@ table thead th {
 }
 
 .footer {
-  background-color: #222d32;
-  color: white;
-  padding: 2em 0;
-  width: 100%;
-  margin-top: 4em;
-  text-align: center;
 }
 
 @media only screen and (max-width: 767px) {
   .ui.grid.stackable>.column:not(.row) {
     padding-bottom: 1rem !important;
   }
+}
+
+/* Add this to your existing CSS file (e.g., css/custom.css) */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.container {
+  flex: 1; /* This allows the main content area to grow and take available space */
+}
+
+.footer {
+  height: 60px; /* Set a fixed height for the footer */
+  /* Add any other styles you want for the footer */
+  background-color: #222d32;
+  color: white;
+  padding: 2em 0;
+  width: 100%;
+  margin-top: 4em;
+  text-align: center;
+  margin-top: auto; /* Pushes the footer to the bottom */
+  display: flex;
+  align-items: center;
 }
