@@ -108,10 +108,6 @@ body {
   flex-direction: column;
 }
 
-.ui.container {
-  flex: 1; /* This allows the main content area to grow and take available space */
-}
-
 .footer {
   height: 60px; /* Set a fixed height for the footer */
   /* Add any other styles you want for the footer */
