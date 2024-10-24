@@ -51,34 +51,53 @@ function renderTable(filteredCompanies) {
       .filter((city) => company.cities[city])
       .join(', ');
     const servicesOffered = company.services.join(', '); // Join services array into string
-
-    // Add 'positive' class for active and 'negative' for inactive companies
-    const rowClass =
-      company.status === 'Active' ? 'neutral' : 'negative disabled';
+    const rowClass = company.status === 'Active' ? 'neutral' : 'negative';
 
     const row = document.createElement('tr');
     row.className = rowClass;
+
+    // Determine if WhatsApp button should be disabled
+    const isWhatsappAvailable = company.whatsapp && company.whatsapp.trim() !== '';
+    const whatsappButtonClass = isWhatsappAvailable ? '' : 'disabled'; // Add 'disabled' class if no link
+
+    // Render WhatsApp button with or without 'disabled' class
+    const whatsappButton = `
+      <div class="mini ui vertical primary button ${whatsappButtonClass}" id="whatsapp" tabindex="0">
+        <div class="visible content">
+          <i class="whatsapp icon"></i>
+        </div>
+      </div>`;
 
     row.innerHTML = `
       <td>${company.name}</td>
       <td>${citiesCovered}</td>
       <td>${servicesOffered}</td>
-      <td>
-        <div class="mini ui vertical  primary button" tabindex="0">
+      <td class="center aligned">
+        <div class="ui mini vertical primary button " tabindex="0">
           <div class="visible content">
             <i class="eye icon"></i>
           </div>
         </div>
+        ${whatsappButton} <!-- WhatsApp button is always rendered -->
       </td>
     `;
 
-    // Add event listener for the button
-    const button = row.querySelector('.mini.button');
-    button.addEventListener('click', () => showModal(company));
+    // Add event listener for the "eye" button
+    const eyeButton = row.querySelector('.mini.button');
+    eyeButton.addEventListener('click', () => showModal(company));
+
+    // Add event listener for the WhatsApp button if it's not disabled
+    const whatsappElement = row.querySelector('#whatsapp');
+    if (isWhatsappAvailable) {
+      whatsappElement.addEventListener('click', () => {
+        window.open(company.whatsapp, '_blank'); // Open WhatsApp link in a new tab
+      });
+    }
 
     tableBody.appendChild(row);
   });
 }
+
 
 function showModal(company) {
   // Populate the modal with company details
@@ -110,11 +129,23 @@ function showModal(company) {
     whatsappElement.textContent = 'N/A'; // Display N/A if no link is present
   }
 
-  document.getElementById('serviceDetail').textContent = company.completeDetail;
+  // TODO: Render Company Complete Details notes in a new line
+  // document.getElementById('serviceDetail').textContent =  company.completeDetail;
+
+  // document.getElementById('serviceDetail').innerHTML = company.completeDetail.replace(/\n/g, '<br>');
+
+  if (company.completeDetail) {
+    const details = company.completeDetail.split('\n');
+    const listItems = details.map(detail => `<li>${detail}</li>`).join('');
+    document.getElementById('serviceDetail').innerHTML = `<ul>${listItems}</ul>`;
+  } else {
+    document.getElementById('serviceDetail').innerHTML = '<br><p>No details available</p>';
+  }
+
 
   // Show the modal
   $('.ui.modal')
-    .modal({ centered: false, transition: 'slide down', closable: false })
+    .modal({ centered: false, transition: 'slide down', closable: true, keyboardShortcuts: true, })
     .modal('show');
 }
 
@@ -200,8 +231,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (loader) loader.classList.remove('active');
   }
 
+  document.getElementById("year").textContent = new Date().getFullYear();
+
   // Run initialization
   init();
 });
+
 
 // Run initialization
