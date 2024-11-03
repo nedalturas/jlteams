@@ -5,39 +5,40 @@
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
 // Fetch data from Google Sheets
+
+// Fetch data from Google Sheets using Netlify function
 async function fetchSheetData() {
-  const response = await fetch('/.netlify/functions/fetch-sheet-data'); 
+  const response = await fetch('/.netlify/functions/fetch-sheet-data'); // Call your Netlify function
   const data = await response.json();
-  return data; // The Netlify function should return the data directly
+  return data; 
 }
-
 // Function to extract companies from the sheet data
-function processSheetData(sheetData) {
-  const headers = sheetData[0];
-  const companies = [];
+// function processSheetData(sheetData) {
+//   const headers = sheetData[0];
+//   const companies = [];
 
-  for (let i = 1; i < sheetData.length; i++) {
-    const row = sheetData[i];
-    const company = {
-      name: row[0],
-      cities: {
-        Dubai: row[1] === 'TRUE',
-        'Abu Dhabi': row[2] === 'TRUE',
-        Sharjah: row[3] === 'TRUE',
-        Ajman: row[4] === 'TRUE',
-        'Al Ain': row[5] === 'TRUE',
-      },
-      // Assuming services are in a comma-separated string like "Home Cleaning, Deep Cleaning"
-      services: row[6].split(',').map((service) => service.trim()), // Split into array and trim whitespace
-      status: row[7],
-      whatsapp: row[8],
-      completeDetail: row[10],
-    };
-    companies.push(company);
-  }
+//   for (let i = 1; i < sheetData.length; i++) {
+//     const row = sheetData[i];
+//     const company = {
+//       name: row[0],
+//       cities: {
+//         Dubai: row[1] === 'TRUE',
+//         'Abu Dhabi': row[2] === 'TRUE',
+//         Sharjah: row[3] === 'TRUE',
+//         Ajman: row[4] === 'TRUE',
+//         'Al Ain': row[5] === 'TRUE',
+//       },
+//       // Assuming services are in a comma-separated string like "Home Cleaning, Deep Cleaning"
+//       services: row[6].split(',').map((service) => service.trim()), // Split into array and trim whitespace
+//       status: row[7],
+//       whatsapp: row[8],
+//       completeDetail: row[10],
+//     };
+//     companies.push(company);
+//   }
 
-  return companies;
-}
+//   return companies;
+// }
 
 
 // Render table rows based on filtered companies

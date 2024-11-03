@@ -1,8 +1,8 @@
 const { google } = require('googleapis');
 
 // Replace with your actual sheet ID, API key, and sheet name
-const sheetId = process.env.SHEET_ID; // Get Sheet ID from Netlify environment variables
-const apiKey = process.env.GOOGLE_SHEETS_API_KEY; // Get API key from Netlify environment variables
+const sheetId = process.env.SHEET_ID; 
+const apiKey = process.env.GOOGLE_SHEETS_API_KEY; 
 const sheetName = 'Sheet1';
 
 // Initialize Google Sheets API client
@@ -14,6 +14,8 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: 'v4', auth });
 
 async function fetchSheetData() {
+
+  
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
@@ -48,6 +50,7 @@ async function fetchSheetData() {
     console.error('Error fetching data:', error);
     throw error; // Re-throw the error to be handled by the caller
   }
+  
 };
 
 // Netlify function handler
