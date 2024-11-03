@@ -11,7 +11,6 @@ const sheetId = config.sheetId;
 const apiKey = config.apiKey;
 const sheetName = config.sheetName;
 
-
 // Fetch data from Google Sheets
 async function fetchSheetData() {
   try {
@@ -252,4 +251,4 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // Run initialization
   init();
-});
+}); 
