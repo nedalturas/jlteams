@@ -1,15 +1,14 @@
-const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
-const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
-const sheetName = 'Sheet1'; // Name of the sheet you're working with
+// const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
+// const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
+// const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
 // Fetch data from Google Sheets
 async function fetchSheetData() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
-  const response = await fetch(url);
+  const response = await fetch('/.netlify/functions/fetch-sheet-data'); 
   const data = await response.json();
-  return data.values; // Returns all the rows
+  return data; // The Netlify function should return the data directly
 }
 
 // Function to extract companies from the sheet data
