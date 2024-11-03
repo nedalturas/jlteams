@@ -3,7 +3,7 @@
 // const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
 // const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
-import config from './js/config.js'; // Assuming config.js is in the same directory
+import config from '.config.js'; // Assuming config.js is in the same directory
 
 const { google } = require('googleapis');
 
