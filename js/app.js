@@ -2,6 +2,9 @@
 // const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
 // const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
 // const sheetName = 'Sheet1'; // Name of the sheet you're working with
+const sheetId = window.SHEET_CONFIG.sheetId;
+const apiKey = window.SHEET_CONFIG.apiKey;
+const sheetName = window.SHEET_CONFIG.sheetName;
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
