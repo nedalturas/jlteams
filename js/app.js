@@ -1,16 +1,36 @@
-const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
-const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
-const sheetName = 'Sheet1'; // Name of the sheet you're working with
+import config from './config.js';
+
+
+// const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q'; // Replace with your actual sheet ID
+// const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
+// const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
+
+
+// Update your variables at the top
+const sheetId = config.sheetId;
+const apiKey = config.apiKey;
+const sheetName = config.sheetName;
+
+
 // Fetch data from Google Sheets
 async function fetchSheetData() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.values; // Returns all the rows
-}
+  try {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Failed to fetch sheet data');
+    }
+    const data = await response.json();
+    return data.values;
+  } catch (error) {
+    console.error('Error fetching sheet data:', error);
+    // Show error message to user
+    document.getElementById('loader').classList.remove('active');
+    return [];
+  }
 
 // Function to extract companies from the sheet data
 function processSheetData(sheetData) {
