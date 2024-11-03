@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the template file
-const configTemplate = fs.readFileSync('config.js', 'utf8');
+const configTemplate = fs.readFileSync('config.template.js', 'utf8');
 
 // Replace environment variables
 const configContent = configTemplate

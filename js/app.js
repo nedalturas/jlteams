@@ -3,12 +3,13 @@
 // const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY'; // Replace with your actual API key
 // const sheetName = 'Sheet1'; // Name of the sheet you're working with
 
+import config from './config.js'; // Assuming config.js is in the same directory
 
 const { google } = require('googleapis');
 
-const sheetId = window.SHEET_CONFIG.sheetId;
-const apiKey = window.SHEET_CONFIG.apiKey;
-const sheetName = window.SHEET_CONFIG.sheetName;
+const sheetId = config.sheetId;
+const apiKey = config.apiKey;
+const sheetName = config.sheetName;
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 const auth = new google.auth.GoogleAuth({
