@@ -7,9 +7,6 @@ import config from './config.js';
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
 
-
-
-// Update your variables at the top
 const sheetId = config.sheetId;
 const apiKey = config.apiKey;
 const sheetName = config.sheetName;
@@ -31,7 +28,7 @@ async function fetchSheetData() {
     document.getElementById('loader').classList.remove('active');
     return [];
   }
-
+}
 // Function to extract companies from the sheet data
 function processSheetData(sheetData) {
   const headers = sheetData[0];
@@ -256,6 +253,3 @@ document.addEventListener('DOMContentLoaded', async function () {
   // Run initialization
   init();
 });
-
-
-// Run initialization
