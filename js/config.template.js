@@ -3,7 +3,7 @@ const apiKey = 'process.env.GOOGLE_SHEETS_API_KEY';
 const sheetName = 'Sheet1'; 
 
 // Export the configuration
-module.exports = {
+export  {
     sheetId,
     apiKey,
     sheetName
