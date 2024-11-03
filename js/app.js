@@ -7,7 +7,10 @@ const apiKey = window.SHEET_CONFIG.apiKey;
 const sheetName = window.SHEET_CONFIG.sheetName;
 
 const cityOptions = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Al Ain'];
-
+const auth = new google.auth.GoogleAuth({
+  keyFile: null, 
+  scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+});
 // Fetch data from Google Sheets
 async function fetchSheetData() {
   try {
