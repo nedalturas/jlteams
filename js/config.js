@@ -1,7 +1,4 @@
-const config = {
-    sheetId: process.env.GOOGLE_SHEETS_ID,
-    apiKey: process.env.GOOGLE_SHEETS_API_KEY,
-    sheetName: 'Sheet1'
-};
+const sheetId = '1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q';
+const apiKey = 'AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY';
+const sheetName = 'Sheet1';
 
-export default config;

@@ -1,7 +1,3 @@
 [build]
   publish = "."
-  command = ""
-
-[context.production.environment]
-  GOOGLE_SHEETS_ID = "1aAOwWOLyUdbT2a3F4IBTHDPnXBlBH240OFtIKom5H9Q"
-  GOOGLE_SHEETS_API_KEY = "AIzaSyCCmTvkwrp1wX5KdCrycH3gixVnAGA77OY"
+  command = "chmod +x build.sh && ./build.sh"
