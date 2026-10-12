@@ -1,0 +1,338 @@
+/*
+    Design Read: sunset notice page for existing users of a service that is closing,
+    in an "evening light" style, dial ENERGY 2 / RHYTHM 2 / MOTION 2.
+ 
+    Reasons:
+    - Gradient: one sky gradient, hero only. It is the identity of a "sunset" page.
+    - Young Serif: warm, human voice for a goodbye. Instrument Sans: plain and readable.
+    - Gold is the single accent: the sun, the dates, the closing motif. Nothing else uses it.
+    - Motion: one moment only, the sun sets once on load. Off when reduced motion is set.
+  */
+:root {
+  --night: #1f1613;
+  --sand: #f3e6d4;
+  --muted: #cdb9a3;
+  --gold: #ffc857;
+  --apricot: #f7c58b;
+  --coral: #f2956a;
+  --rust: #d9603f;
+  --S: clamp(180px, 30vw, 340px); /* sun diameter */
+  --band: 40px; /* horizon height */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--night);
+  color: var(--sand);
+  font-family:
+    "Instrument Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+a,
+a:hover {
+  color: inherit;
+}
+.display {
+  font-family: "Young Serif", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Keyboard focus, visible everywhere */
+a:focus-visible,
+.ui.ui.button:focus-visible {
+  outline: 3px solid var(--night);
+  outline-offset: 3px;
+}
+.on-dark a:focus-visible,
+.on-dark .ui.ui.button:focus-visible {
+  outline-color: var(--gold);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--apricot) 0%,
+    var(--coral) 62%,
+    var(--rust) 100%
+  );
+  color: var(--night);
+  padding-bottom: calc(var(--band) + var(--S) / 2 + 24px);
+  /* overflow: hidden; */
+}
+
+.ui.secondary.menu.site-nav {
+  margin: 0;
+  padding-top: 20px;
+}
+.ui.secondary.menu.site-nav .item {
+  color: var(--night);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+}
+.ui.secondary.menu.site-nav .item.brand {
+  font-size: 20px;
+  padding-left: 0;
+}
+.ui.secondary.menu.site-nav a.item:hover {
+  background: rgba(31, 22, 19, 0.1);
+  color: var(--night);
+}
+
+.hero-copy {
+  padding: 72px 0 40px;
+}
+h1.display {
+  font-size: clamp(36px, 5.4vw, 64px);
+  line-height: 1.1;
+  max-width: 11em;
+  margin: 0 0 24px;
+  color: var(--night);
+}
+.lead {
+  font-size: 20px;
+  max-width: 32em;
+  margin: 0 0 36px;
+}
+
+.ui.button.cta {
+  background: var(--night);
+  color: var(--sand);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 16px 26px;
+  border-radius: 4px;
+  margin: 0 12px 12px 0;
+  box-shadow: none;
+}
+.ui.button.cta:hover {
+  background: #3a2a24;
+  color: var(--sand);
+}
+.ui.button.cta.ghost {
+  background: transparent;
+  color: var(--night);
+  box-shadow: inset 0 0 0 2px var(--night);
+}
+.ui.button.cta.ghost:hover {
+  background: rgba(31, 22, 19, 0.1);
+  color: var(--night);
+}
+.ui.button.cta.gold {
+  background: var(--gold);
+  color: var(--night);
+}
+.ui.button.cta.gold:hover {
+  background: #ffd684;
+  color: var(--night);
+}
+.ui.button.cta.pending {
+  opacity: 1;
+  background: transparent;
+  color: var(--night);
+  box-shadow: inset 0 0 0 2px var(--night);
+  pointer-events: none;
+}
+
+.days {
+  margin-top: 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.days[hidden] {
+  display: none;
+}
+.days .n {
+  font-size: 56px;
+  line-height: 1;
+}
+.days .lbl {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* The sun sets once, half behind the horizon band */
+.scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--band) + var(--S));
+  overflow: hidden;
+  pointer-events: none;
+}
+.sun {
+  position: absolute;
+  width: var(--S);
+  height: var(--S);
+  right: 4%;
+  bottom: var(--band);
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translateY(50%);
+  animation: set 5s cubic-bezier(0.45, 0.05, 0.3, 1) 0.4s both;
+}
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--band);
+  background: var(--night);
+}
+@keyframes set {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sun {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Sections ---------- */
+.band-section {
+  padding: 96px 0;
+}
+.night {
+  background: var(--night);
+  color: var(--sand);
+}
+.sand {
+  background: var(--sand);
+  color: var(--night);
+}
+
+h2.display {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  margin: 0 0 40px;
+  color: inherit;
+}
+.sand h2.display {
+  margin-bottom: 20px;
+}
+
+/* Timeline: dates are a real sequence */
+.ui.divided.list.timeline {
+  margin: 0;
+  max-width: 860px;
+}
+.ui.divided.list.timeline > .item {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) 1fr;
+  gap: 6px 32px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(243, 230, 212, 0.25);
+}
+.ui.divided.list.timeline > .item:after {
+  display: none;
+}
+.ui.divided.list.timeline > .item:last-child {
+  border-bottom: 1px solid rgba(243, 230, 212, 0.25);
+}
+.timeline .when {
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--gold);
+}
+.timeline .what strong {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 4px;
+}
+.timeline .what p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 34em;
+}
+
+/* Export */
+.sand p {
+  max-width: 32em;
+  margin: 0 0 28px;
+}
+.ui.stackable.grid.export {
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .ui.stackable.grid.export > .row {
+    align-items: flex-start;
+  }
+}
+
+/* Closing, with a half-sun as the repeated motif */
+.contact::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 60px;
+  border-radius: 120px 120px 0 0;
+  background: var(--gold);
+  margin-bottom: 48px;
+}
+.contact p {
+  color: var(--muted);
+  max-width: 32em;
+  margin: 0 0 8px;
+}
+.contact .mail {
+  color: var(--sand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site-foot {
+  border-top: 1px solid rgba(243, 230, 212, 0.25);
+  padding: 28px 0 40px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.site-foot p {
+  margin: 0;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 767px) {
+  .hero {
+    padding-bottom: calc(var(--band) + var(--S) + 8px);
+  }
+  .sun {
+    right: auto;
+    left: 50%;
+    margin-left: calc(var(--S) / -2);
+  }
+  .hero-copy {
+    padding-top: 48px;
+  }
+  .band-section {
+    padding: 64px 0;
+  }
+  .ui.divided.list.timeline > .item {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 599px) {
+  .ui.secondary.menu.site-nav .item.hide-sm {
+    display: none;
+  }
+}

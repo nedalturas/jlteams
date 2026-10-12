@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="google-site-verification"
+      content="oie3PhMI5w_UfKzfeR8D0Augu99v461SsCeEd2i52Qs"
+    />
+    <title>Justlife Team</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/sunset.css" />
+
+    <meta
+      name="description"
+      content="See marketplace teams for Justlife easily"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jlteamdb.netlify.app/" />
+    <meta property="og:title" content="Justlife Team" />
+    <meta
+      property="og:description"
+      content="See marketplace teams for Justlife easily"
+    />
+    <meta
+      property="og:image"
+      content="https://jlteamdb.netlify.app/assets/jlteammeta.png"
+    />
+    <meta property="og:image:alt" content="Justlife Team Meta Image" />
+    <meta name="theme-color" content="#fafafa" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.png" />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"
+      defer
+    ></script>
+
+    <!-- <script src="js/app.js"></script> -->
+  </head>
+
+  <body>
+    <header class="hero" id="top">
+      <div class="ui container">
+        <nav class="ui secondary menu site-nav" aria-label="Page sections">
+          <a class="item brand display" href="#top"
+            ><span data-bind="product">[Product name]</span></a
+          >
+          <!-- <div class="right menu"> -->
+          <!--   <a class="item hide-sm" href="#timeline">Timeline</a> -->
+          <!--   <a class="item" href="#export">Export your data</a> -->
+          <!--   <a class="item hide-sm" href="#contact">Contact</a> -->
+          <!-- </div> -->
+        </nav>
+
+        <div class="hero-copy">
+          <h1 class="display">
+            <span data-bind="product">[Product name]</span> is shutting down on
+            <span data-bind="shutdownDate">[shutdown date]</span>.
+          </h1>
+          <p class="lead">The site will keep working until the sunset date</p>
+
+          <!-- <a class="ui button cta" href="#export">Export your data</a> -->
+          <!-- <a class="ui button cta ghost" href="#timeline">See the timeline</a> -->
+
+          <div class="days" id="days" hidden>
+            <span class="n display" id="days-n"></span>
+            <span class="lbl" id="days-lbl"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="horizon"></div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="band-section night on-dark"
+        id="contact"
+        aria-labelledby="contact-h"
+      >
+        <div class="ui container contact">
+          <h2 class="display" id="contact-h">
+            Thank you for using <span data-bind="product">[Product name]</span>
+          </h2>
+          <p>
+            This was the first project I contributed to justlife and was fun to
+            make and maintain.
+          </p>
+          <p>If something here does not answer your question, write to</p>
+          <p>
+            <a class="mail" data-href="supportEmail" data-bind="supportEmail"
+              >[support email]</a
+            >
+          </p>
+          <p>(please don't)</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="night on-dark">
+      <div class="ui container">
+        <div class="site-foot">
+          <a
+            href="https://nedalturas.github.io/anti-claim/"
+            target="_blank"
+            data-bind="team"
+            >[Team name]</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      /*
+    Fill this in once. Anything left empty keeps its [bracketed] placeholder on the page.
+    Dates use YYYY-MM-DD.
+  */
+      const CONFIG = {
+        product: "jlteams",
+        team: "ned.dev",
+        announceDate: "",
+        shutdownDate: "Oct 16,2026",
+        deletionDate: "Oct 17, 2026",
+        exportUrl: "",
+        supportEmail: "nedalturas527@gmail.com",
+      };
+
+      function parseDate(v) {
+        const d = new Date(v + "T00:00:00");
+        return isNaN(d) ? null : d;
+      }
+      function formatDate(v) {
+        const d = parseDate(v);
+        return d
+          ? d.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : v;
+      }
+
+      // Text placeholders
+      document.querySelectorAll("[data-bind]").forEach(function (el) {
+        const key = el.dataset.bind;
+        const v = CONFIG[key];
+        if (!v) return;
+        el.textContent = /Date$/.test(key) ? formatDate(v) : v;
+      });
+
+      // Links: real destination, or an honest "coming soon" label
+      document.querySelectorAll("[data-href]").forEach(function (el) {
+        const key = el.dataset.href;
+        const v = CONFIG[key];
+        if (v) {
+          el.setAttribute("href", key === "supportEmail" ? "mailto:" + v : v);
+        } else if (el.dataset.pending) {
+          el.textContent = el.dataset.pending;
+          el.classList.add("pending");
+          el.setAttribute("aria-disabled", "true");
+        }
+      });
+
+      // Countdown, only when a real shutdown date is set
+      (function () {
+        const d = parseDate(CONFIG.shutdownDate);
+        if (!d) return;
+        const days = Math.ceil((d - new Date()) / 86400000);
+        document.getElementById("days-n").textContent = Math.max(days, 0);
+        document.getElementById("days-lbl").textContent =
+          days > 0
+            ? days === 1
+              ? "day until shutdown"
+              : "days until shutdown"
+            : "The service has shut down";
+        document.getElementById("days").hidden = false;
+      })();
+    </script>
+  </body>
+</html>
