@@ -1,0 +1,196 @@
+:root {
+  --brand-color: #01c3ff;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: #f0f1f1;
+}
+
+#brand-name {
+  font-weight: bold;
+  color: var(--brand-color);
+  font-size: 1.2em;
+}
+
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.shutdown-banner {
+  background-color: #1f1613;
+  color: #f3e6d4;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(255, 200, 87, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.shutdown-banner .banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  text-align: center;
+}
+
+.shutdown-banner .banner-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shutdown-banner .banner-text .icon {
+  color: #ffc857;
+  margin: 0;
+}
+
+.shutdown-banner .banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffc857;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.shutdown-banner .banner-link:hover {
+  color: #ffd684;
+}
+
+.shutdown-banner .banner-link .icon {
+  font-size: 0.85em;
+  margin: 0;
+  transition: transform 0.15s ease;
+}
+
+.shutdown-banner .banner-link:hover .icon {
+  transform: translateX(3px);
+}
+
+#nav {
+  position: relative !important;
+  top: auto !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+#content {
+  margin-top: 6.5em;
+  z-index: 500;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.main-container {
+  max-width: 600px !important;
+  margin: 0 auto;
+  padding: 2em;
+}
+
+.fun-header {
+  color: #2185d0;
+  font-size: 2.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+.fun-text {
+  font-size: 1.2em !important;
+  color: #666;
+  line-height: 1.6 !important;
+}
+
+.status-segment {
+  background: white !important;
+  border: 2px solid #e0e0e0 !important;
+  margin: 1em 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.status-segment:hover {
+  transform: translateY(-2px);
+}
+
+#whatsapp {
+  background-color: #25d366;
+}
+
+table thead th {
+  color: black;
+  font-weight: bolder;
+}
+
+.footer {
+}
+
+@media only screen and (max-width: 767px) {
+  #content {
+    margin-top: 8em;
+  }
+  .ui.grid.stackable>.column:not(.row) {
+    padding-bottom: 1rem !important;
+  }
+}
+
+/* Add this to your existing CSS file (e.g., css/custom.css) */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  height: 60px; /* Set a fixed height for the footer */
+  /* Add any other styles you want for the footer */
+  background-color: #222d32;
+  color: white;
+  padding: 2em 0;
+  width: 100%;
+  margin-top: 4em;
+  text-align: center;
+  margin-top: auto; /* Pushes the footer to the bottom */
+  display: flex;
+  align-items: center;
+}

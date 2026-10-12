@@ -34,25 +34,38 @@
 
 <body>
 
-    {# NAV #}
-
-    <div class="ui top borderless fixed mini menu" id="nav">
-        <div class="ui container">
-            <div class="item">
-                <img src="assets/logo.png" alt="Logo" />
-            </div>
-            <div class="item" id="brand-name">Justlife Team</div>
-
-            <div class="right  menu">
-                <a href="index.html" class="item">Database</a>
-                <a href="faq.html" class="item active">FAQs</a>
+    <!-- SITE HEADER -->
+    <header id="site-header">
+        <div class="shutdown-banner" role="alert" aria-label="Site shutdown notice">
+            <div class="ui container banner-container">
+                <span class="banner-text">
+                    <i class="exclamation triangle icon" aria-hidden="true"></i>
+                    <strong>Notice:</strong> This site will be shutting down.
+                </span>
+                <a href="sunset.html" class="banner-link">
+                    Learn more <i class="arrow right icon" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
-    </div>
+
+        <nav class="ui borderless mini menu" id="nav" aria-label="Main Navigation">
+            <div class="ui container">
+                <div class="item">
+                    <img src="assets/logo.png" alt="Logo" />
+                </div>
+                <div class="item" id="brand-name">Justlife Team</div>
+
+                <div class="right menu">
+                    <a href="index.html" class="item">Database</a>
+                    <a href="faq.html" class="item active">FAQs</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="ui container">
 
-        <div class="ui center aligned middle aligned grid" style="min-height: 100vh; margin: 0;">
+        <div class="ui center aligned middle aligned grid" style="min-height: 100vh; margin: 0; padding-top: 6em; padding-bottom: 3em;">
             <div class="column">
                 <div class="main-container">
                     <!-- Simple Robot Illustration -->

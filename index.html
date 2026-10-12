@@ -25,7 +25,6 @@
 
   <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css" />
-  <link rel="" type="" href="css/sunset.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js" defer></script>
@@ -36,21 +35,35 @@
 
 <body>
 
-  {# NAV #}
-
-  <div class="ui top borderless fixed mini menu" id="nav">
-    <div class="ui container">
-      <div class="item">
-        <img src="assets/logo.png" alt="Logo" />
-      </div>
-      <div class="item" id="brand-name">Justlife Team</div>
-
-      <div class="right menu">
-        <a href="index.html" class="item active">Database</a>
-        <a href="faq.html" class="item">FAQs</a>
+  <!-- SITE HEADER -->
+  <header id="site-header">
+    <div class="shutdown-banner" role="alert" aria-label="Site shutdown notice">
+      <div class="ui container banner-container">
+        <span class="banner-text">
+          <i class="exclamation triangle icon" aria-hidden="true"></i>
+          <strong>Notice:</strong> This site will be shutting down.
+        </span>
+        <a href="sunset.html" class="banner-link">
+          Learn more <i class="arrow right icon" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
-  </div>
+
+    <nav class="ui borderless mini menu" id="nav" aria-label="Main Navigation">
+      <div class="ui container">
+        <div class="item">
+          <img src="assets/logo.png" alt="Logo" />
+        </div>
+        <div class="item" id="brand-name">Justlife Team</div>
+
+        <div class="right menu">
+          <a href="index.html" class="item active">Database</a>
+          <a href="faq.html" class="item">FAQs</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
 
   <div class="ui container">
     <!-- FILTERS -->
